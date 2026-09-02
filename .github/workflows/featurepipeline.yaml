@@ -1,5 +1,6 @@
 name: feature-pipeline
-jobs: [push]
+on: [push]
+jobs:
   feature-pipeline:
     uses: hemanchandra-devops/workflows/.github/workflows/featurenodejspipeline.yaml@main
     with:
