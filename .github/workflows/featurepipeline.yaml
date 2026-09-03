@@ -1,5 +1,8 @@
 name: feature-pipeline
 on: [push]
+permissions:
+  contents: read
+  security-events: read
 jobs:
   feature-pipeline:
     uses: hemanchandra-devops/workflows/.github/workflows/featurenodejspipeline.yaml@main
