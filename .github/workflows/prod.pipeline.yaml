@@ -1,4 +1,4 @@
-name: non-prodpipeline
+name: prodpipeline
 on: 
   workflow_dispatch:
     inputs:
@@ -6,29 +6,19 @@ on:
         description: "Commit ID to deploy"
         required: true
         type: string
-      environment:
-        description: "Deployment environment"
-        required: true
-        default: uat
-        type: choice
-        options:
-          - uat
-          - sat 
-          - qa
 concurrency:
-  group: roboshop-catalogue-uat
+  group: roboshop-catalogue-prod
   cancel-in-progress: false
 permissions:
   contents: read
   security-events: read
   statuses: write
 jobs:
-  non-prodpipeline:
+  prodpipeline:
     if: github.ref == 'refs/heads/main'
-    uses: hemanchandra-devops/workflows/.github/workflows/non-prodnodejspipeline.yaml@main
+    uses: hemanchandra-devops/workflows/.github/workflows/prodnodejspipeline.yaml@main
     with:
       project: "roboshop"
       component: "catalogue"
       version: ${{ inputs.version }}
-      environment: ${{ inputs.environment }}
     secrets: inherit
