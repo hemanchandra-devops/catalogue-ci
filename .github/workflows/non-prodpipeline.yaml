@@ -1,0 +1,31 @@
+name: non-prodpipeline
+on: 
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Commit ID to deploy"
+        required: true
+        type: string
+      environment:
+        description: "Deployment environment"
+        required: true
+        default: uat
+        type: choice
+        options:
+          - uat
+          - sat 
+          - qa
+permissions:
+  contents: read
+  security-events: read
+  statuses: write
+jobs:
+  non-prodpipeline:
+    if: github.ref == 'refs/heads/main'
+    uses: hemanchandra-devops/workflows/.github/workflows/non-prodnodejspipeline.yaml@main
+    with:
+      project: "roboshop"
+      component: "catalogue"
+      version: ${{ inputs.version }}
+      environment: ${{ inputs.environment }}
+    secrets: inherit
