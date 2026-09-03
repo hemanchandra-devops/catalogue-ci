@@ -29,3 +29,4 @@ jobs:
       version: ${{ inputs.version }}
       environment: ${{ inputs.environment }}
     secrets: inherit
+    
